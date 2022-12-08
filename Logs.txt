@@ -1,0 +1,41 @@
+29.11.2022:
+
+Einfach: Grundlegende funktion.
+Mehrspieler modus.
+Einbindug eines bots.
+
+Schwierig: Algorythmus der die richtige
+anzahl an streichhölzern nimmt.
+
+Schwierig: Form nicht hässlich und richtig skalierend zu machen.
+
+Probleme: hässliches Aussehen der forms
+
+30.11.2022:
+
+Schwierigkeiten:
+Bot hat verbotene züge gemacht, behebung hat
+einige zeit in anspruch genommen
+
+Einfach: 
+Animation und erstellung der streichölzer.
+Bild was deutlich macht, welcher spieler am zug ist
+
+Probleme: Animations performance.
+durch den custom ramen kann man die größe des fensters nicht ändern
+
+1. - 3. .12.2022:
+Starke optimierung der animationen.  (Performance immernoch problematisch)
+Custom ramen für das fenser.
+Random welcher spieler beginnt.
+Hinzufügen einer simplen anleitung.
+Hinzufügung eines leaderbords mit einfachem save system.
+Hinzufügung von flächen auf denen man die fenstergröße ändern kann
+
+Probleme: Schreckliche performance von forms
+		  Skalierungsprobleme von forms auf microsoft surface - gelöst
+
+6.12-
+Online multiplayer
+Probleme: 
+manchmal exception beim speichern
