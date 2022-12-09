@@ -13,17 +13,32 @@ namespace Nim
 {
     public class AudioManager
     {
+        private static SoundPlayer _soundPlayer;
 
         /// <summary>
-        /// Plays a audio file form the audio folder
-        /// with the given name (File type included)
-        /// This only works with .wav files
+        /// Loads the audio file form the audio folder
+        /// with the input name
+        /// The file must be a .wav file.
+        /// This overrides the last loaded file
         /// </summary>
         /// <param name="name"></param>
-        public static void Play(string name)
+        public static void Load(string name)
         {
-            SoundPlayer player = new SoundPlayer(GetAudioPath(name));
-            player.Play();
+
+            _soundPlayer = new SoundPlayer(GetAudioPath(name));
+            _soundPlayer.Load();
+        }
+
+        /// <summary>
+        /// Plays the audio file last loaded with 
+        /// Load()
+        /// </summary>
+        public static void Play()
+        {
+            if (_soundPlayer == null)
+                return;
+
+            _soundPlayer.Play();
         }
 
         /// <summary>

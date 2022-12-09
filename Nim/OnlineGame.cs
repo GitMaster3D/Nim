@@ -104,13 +104,15 @@ namespace Nim
             //Play take match sound
             _pickEvent += () =>
             {
-                AudioManager.Play("Cannon impact 9.wav");
+                AudioManager.Load("Cannon impact 9.wav");
+                AudioManager.Play();
             };
 
             //Play turn chage sound
             _turnChangeEvent += () =>
             {
-                AudioManager.Play("Magic Spell_Simple Swoosh_6.wav");
+                AudioManager.Load("Magic Spell_Simple Swoosh_6.wav");
+                AudioManager.Play();
                 Thread.Sleep(300);
             };
 
@@ -200,8 +202,9 @@ namespace Nim
             val[_currentPlayer]++;
             LeaderboardHandler.SetPlayerLoses(val);
 
-            //Play cool sound
-            AudioManager.Play("Heheheha.wav");
+            //Play Lose sound
+            AudioManager.Load("Heheheha.wav");
+            AudioManager.Play();
 
             //End the connection
             _multiplayerHandler.Close();

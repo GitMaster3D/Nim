@@ -83,7 +83,8 @@ namespace Nim
             //Play take match sound
             _pickEvent += () =>
             {
-                AudioManager.Play("Cannon impact 9.wav");
+                AudioManager.Load("Cannon impact 9.wav");
+                AudioManager.Play();
             };
 
             //tell the startet that the game logic loaded
@@ -100,7 +101,8 @@ namespace Nim
             if (_remainingPicks < _maxPicks)
             {
                 //Play turn change sound
-                AudioManager.Play("Magic Spell_Simple Swoosh_6.wav");
+                AudioManager.Load("Magic Spell_Simple Swoosh_6.wav");
+                AudioManager.Play();
                 Thread.Sleep(300);
 
 
@@ -157,7 +159,8 @@ namespace Nim
             }
 
             //Play turn change sound
-            AudioManager.Play("Magic Spell_Simple Swoosh_6.wav");
+            AudioManager.Load("Magic Spell_Simple Swoosh_6.wav");
+            AudioManager.Play();
             Thread.Sleep(300);
 
             _currentPlayer = 0;
@@ -209,11 +212,17 @@ namespace Nim
             val[_currentPlayer]++;
             LeaderboardHandler.SetPlayerLoses(val);
 
+            //Refresh before waiting to avoid lag before showing loose screen
+            _form1.Refresh();
+
+            //Load audio
+            AudioManager.Load("Heheheha.wav");
+
             //Wait for sounds to finish
-            Thread.Sleep(300);
+            Thread.Sleep(150);
 
             //Play cool sound
-            AudioManager.Play("Heheheha.wav");
+            AudioManager.Play();
         }
 
         /// <summary>
@@ -232,8 +241,9 @@ namespace Nim
                 //save that player won against bot
                 LeaderboardHandler.s_botLoses += 1;
 
-                //Play cool sound
-                AudioManager.Play("Heheheha.wav");
+                //Play Lose sound
+                AudioManager.Load("Heheheha.wav");
+                AudioManager.Play();
 
                 return true;
             }
