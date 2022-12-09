@@ -398,7 +398,7 @@
             this.CurrentPlayerLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CurrentPlayerLabel.ForeColor = System.Drawing.SystemColors.Control;
             this.CurrentPlayerLabel.Location = new System.Drawing.Point(1582, 0);
-            this.CurrentPlayerLabel.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.CurrentPlayerLabel.Margin = new System.Windows.Forms.Padding(8);
             this.CurrentPlayerLabel.Name = "CurrentPlayerLabel";
             this.CurrentPlayerLabel.Padding = new System.Windows.Forms.Padding(0, 39, 0, 0);
             this.CurrentPlayerLabel.Size = new System.Drawing.Size(178, 100);

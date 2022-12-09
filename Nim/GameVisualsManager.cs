@@ -53,19 +53,16 @@ namespace Nim
             _gameManager._turnChangeEvent += updateLabels;
 
             //Create Matches
-            List<PictureBox> pictureBoxes = GenerateMatches(_gameManager._matches, 20, GetImage("Match.png"), form1._mainGamePanel);
+            Stack<PictureBox> pictureBoxes = GenerateMatches(_gameManager._matches, 20, GetImage("Match.png"), form1._mainGamePanel);
             
 
             //Remove match when a match is picked
             Action removeMatches = () =>
             {
-                PictureBox remove = pictureBoxes[pictureBoxes.Count - 1]; //Box that should be removed
-
-                //VerticalMove(remove, remove.Location.Y - 800, 300); //Smooth match removing animation
+                PictureBox remove = pictureBoxes.Pop(); //Box that should be removed
                 HorizontalMove(remove, remove.Location.X + 800, 300);
 
-                pictureBoxes.RemoveAt(pictureBoxes.Count - 1);
-                form1._mainGamePanel.Controls.Remove(remove);
+                form1._mainGamePanel.Controls.Remove(remove); //Remove from form
             };
             _gameManager._pickEvent += removeMatches;
 
@@ -74,7 +71,7 @@ namespace Nim
 
             //Tell the game that visuals have loaded
             starter._VisualsManagerLoaded = true;
-        }
+        }   
 
 
 
@@ -108,9 +105,9 @@ namespace Nim
         /// 
         /// <param name="offset"></param> 
         /// How far the matches are apart
-        public List<PictureBox> GenerateMatches(int amount, int offset, Image matchImage, Panel panel)
+        public Stack<PictureBox> GenerateMatches(int amount, int offset, Image matchImage, Panel panel)
         {
-            List<PictureBox> matches = new List<PictureBox>();
+            Stack<PictureBox> matches = new Stack<PictureBox>();
 
             for (int i = 0; i < amount; i++)
             {
@@ -135,7 +132,7 @@ namespace Nim
                 panel.Controls.Add(pb);
 
                 //Save Match
-                matches.Add(pb);
+                matches.Push(pb);
             }
 
             return matches;
