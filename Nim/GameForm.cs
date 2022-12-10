@@ -27,7 +27,7 @@ namespace Nim
         public bool _botmatch;
         public MultiplayerHandler _multiplayerHandler;
 
-        //Visible elements
+        //Control elements
         public Panel _mainGamePanel;
         public Label _matchesLabel;
         public Label _reamainingPicksLabel;
@@ -138,7 +138,6 @@ namespace Nim
 
 
 
-
         /// <summary>
         /// Click to pass the turn to the opponent
         /// </summary>
@@ -162,10 +161,22 @@ namespace Nim
             int matches;
             int.TryParse(MatchesTextbox.Text, out matches);
 
+            //Default match count
+            if (MatchesTextbox.Text == "")
+                matches = 15;
+
+
+
             //Get player amount
             int players = 1;
             if (!BotmatchCheckbox.Checked)
                 int.TryParse(PlayerCountTextbox.Text, out players);
+
+            //Default player count
+            if (!BotmatchCheckbox.Checked && PlayerCountTextbox.Text == "")
+                players = 2;
+
+
 
             //Start multiplayer game if multiplayer is selected and options are correct
             if (_multiplayer && matches >= 15 && matches < 128 && _multiplayerHandler._isHost)
@@ -179,6 +190,7 @@ namespace Nim
                 _controlsPanel.Visible = true;
                 StartPannel.Visible = false;
 
+
                 //Handle the game logic
                 GameStarter starter = new GameStarter();
                 _onlineGame = new OnlineGame(matches, this, starter, _multiplayerHandler);
@@ -189,6 +201,7 @@ namespace Nim
 
                 return;
             }
+
             
             //Start the game if the start options are correct
             if ((players >= 2 && players <= 4 && matches >= 15 && matches < 128 && !_multiplayer) || (BotmatchCheckbox.Checked && matches >= 10 && matches < 128 && !_multiplayer))
@@ -334,6 +347,8 @@ namespace Nim
             EndGame();
         }
 
+
+
         /// <summary>
         /// Ends the game, the player ending the game looses
         /// </summary>
@@ -362,6 +377,7 @@ namespace Nim
         }
 
 
+
         /// <summary>
         /// Connects to entered ip and entered port
         /// </summary>
@@ -370,6 +386,8 @@ namespace Nim
             _multiplayerHandler.Connect();
         }
 
+
+
         /// <summary>
         /// Hosts a server on the entered port
         /// </summary>
@@ -377,6 +395,8 @@ namespace Nim
         {
             _multiplayerHandler.Host();
         }
+
+
 
         /// <summary>
         /// Toggles between online and 

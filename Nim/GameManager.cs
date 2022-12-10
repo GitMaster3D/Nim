@@ -7,6 +7,10 @@ using System.Windows.Forms;
 
 namespace Nim
 {
+    /// <summary>
+    /// Handles A Standart game of nim agains either
+    /// a bot or local multiplayer from 2 - 4 players
+    /// </summary>
     public class GameManager
     {
         //Public:
@@ -97,6 +101,7 @@ namespace Nim
         }
 
 
+
         /// <summary>
         ///  Tells the Game that 
         ///  the last turn ended
@@ -132,6 +137,8 @@ namespace Nim
                 _turnChangeEvent?.Invoke();
             }
         }
+
+
 
         /// <summary>
         /// Bot performs a turn and passes
@@ -174,6 +181,8 @@ namespace Nim
             return false;
         }
 
+
+
         /// <summary>
         /// Removes one match
         /// </summary>
@@ -190,6 +199,8 @@ namespace Nim
             }
         }
 
+
+
         /// <summary>
         /// Check if the current player
         /// has lost the game
@@ -201,6 +212,8 @@ namespace Nim
                 Lose();
             }
         }
+
+
 
         /// <summary>
         /// Call this to let the current player lose
@@ -230,6 +243,8 @@ namespace Nim
             AudioManager.Play();
         }
 
+
+
         /// <summary>
         /// Specialized loose check for 
         /// bot
@@ -254,6 +269,7 @@ namespace Nim
             }
             return false;
         }
+
 
         public enum Players
         {

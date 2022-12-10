@@ -359,9 +359,9 @@
             this.EndgameBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.EndgameBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.EndgameBtn.ForeColor = System.Drawing.Color.Red;
-            this.EndgameBtn.Location = new System.Drawing.Point(603, 39);
+            this.EndgameBtn.Location = new System.Drawing.Point(603, 3);
             this.EndgameBtn.Name = "EndgameBtn";
-            this.EndgameBtn.Size = new System.Drawing.Size(126, 51);
+            this.EndgameBtn.Size = new System.Drawing.Size(126, 87);
             this.EndgameBtn.TabIndex = 10;
             this.EndgameBtn.Text = "Surrender";
             this.EndgameBtn.UseVisualStyleBackColor = true;
@@ -374,7 +374,7 @@
             this.CurrentPlayerLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CurrentPlayerLabel.ForeColor = System.Drawing.SystemColors.Control;
             this.CurrentPlayerLabel.Location = new System.Drawing.Point(1063, 0);
-            this.CurrentPlayerLabel.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.CurrentPlayerLabel.Margin = new System.Windows.Forms.Padding(5);
             this.CurrentPlayerLabel.Name = "CurrentPlayerLabel";
             this.CurrentPlayerLabel.Padding = new System.Windows.Forms.Padding(0, 25, 0, 0);
             this.CurrentPlayerLabel.Size = new System.Drawing.Size(110, 63);
@@ -464,7 +464,7 @@
             this.Matches.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Matches.ForeColor = System.Drawing.SystemColors.Control;
             this.Matches.Location = new System.Drawing.Point(10, 10);
-            this.Matches.Margin = new System.Windows.Forms.Padding(10, 10, 10, 10);
+            this.Matches.Margin = new System.Windows.Forms.Padding(10);
             this.Matches.Name = "Matches";
             this.Matches.Size = new System.Drawing.Size(241, 46);
             this.Matches.TabIndex = 0;

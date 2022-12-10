@@ -29,6 +29,8 @@ namespace Nim
             _soundPlayer.Load();
         }
 
+
+
         /// <summary>
         /// Plays the audio file last loaded with 
         /// Load()
@@ -40,6 +42,8 @@ namespace Nim
 
             _soundPlayer.Play();
         }
+
+
 
         /// <summary>
         /// Gets an image from the Audio folder

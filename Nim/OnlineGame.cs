@@ -4,6 +4,10 @@ using System.Windows.Forms;
 
 namespace Nim
 {
+    /// <summary>
+    /// Handles a online multiplayer game of nim
+    /// between 2 players
+    /// </summary>
     public class OnlineGame
     {
         //Public:
@@ -135,6 +139,7 @@ namespace Nim
         }
 
 
+
         /// <summary>
         ///  Tells the Game that 
         ///  the last turn ended
@@ -156,6 +161,8 @@ namespace Nim
                 LooseCheck(); // ckeck if game ended
             }
         }
+
+
 
         /// <summary>
         /// Removes one match
@@ -179,6 +186,8 @@ namespace Nim
             }
         }
 
+
+
         /// <summary>
         /// Check if the current player
         /// has lost the game
@@ -191,6 +200,11 @@ namespace Nim
             }
         }
 
+
+        /// <summary>
+        /// Shows the lose screen, saves the loser 
+        /// to the save file
+        /// </summary>
         public void Lose()
         {
             //Show game end screen
@@ -211,6 +225,7 @@ namespace Nim
             //End the connection
             _multiplayerHandler.Close();
         }
+
 
 
         public enum Players
