@@ -30,6 +30,11 @@ namespace Nim
         private int _lastTaken; // Last amount of matches taken by a player
         private int _lastMatchAmount; // Last amount of matches
 
+        //Const
+        private const string _pickSoundName = "Cannon impact 9.wav"; //Cashe sound names to avoid allocating garbage
+        private const string _turnChangeSoundName = "Magic Spell_Simple Swoosh_6.wav";
+        private const string _loseSoundName = "Heheheha.wav";
+
         /// <summary>
         /// Initialize Needed Game variables
         /// </summary>
@@ -83,7 +88,7 @@ namespace Nim
             //Play take match sound
             _pickEvent += () =>
             {
-                AudioManager.Load("Cannon impact 9.wav");
+                AudioManager.Load(_pickSoundName);
                 AudioManager.Play();
             };
 
@@ -101,7 +106,7 @@ namespace Nim
             if (_remainingPicks < _maxPicks)
             {
                 //Play turn change sound
-                AudioManager.Load("Magic Spell_Simple Swoosh_6.wav");
+                AudioManager.Load(_turnChangeSoundName);
                 AudioManager.Play();
                 Thread.Sleep(300);
 
@@ -159,7 +164,7 @@ namespace Nim
             }
 
             //Play turn change sound
-            AudioManager.Load("Magic Spell_Simple Swoosh_6.wav");
+            AudioManager.Load(_turnChangeSoundName);
             AudioManager.Play();
             Thread.Sleep(300);
 
@@ -216,7 +221,7 @@ namespace Nim
             _form1.Refresh();
 
             //Load audio
-            AudioManager.Load("Heheheha.wav");
+            AudioManager.Load(_loseSoundName);
 
             //Wait for sounds to finish
             Thread.Sleep(150);
@@ -242,7 +247,7 @@ namespace Nim
                 LeaderboardHandler.s_botLoses += 1;
 
                 //Play Lose sound
-                AudioManager.Load("Heheheha.wav");
+                AudioManager.Load(_loseSoundName);
                 AudioManager.Play();
 
                 return true;

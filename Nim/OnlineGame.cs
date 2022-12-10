@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Nim
@@ -27,6 +24,11 @@ namespace Nim
         //private
         private GameForm _gameForm;
         private MultiplayerHandler _multiplayerHandler;
+
+        //Const
+        private const string _pickSoundName = "Cannon impact 9.wav"; //Cashe sound names to avoid allocating garbage
+        private const string _turnChangeSoundName = "Magic Spell_Simple Swoosh_6.wav";
+        private const string _loseSoundName = "Heheheha.wav";
 
         /// <summary>
         /// Initialize Needed Game variables
@@ -104,14 +106,14 @@ namespace Nim
             //Play take match sound
             _pickEvent += () =>
             {
-                AudioManager.Load("Cannon impact 9.wav");
+                AudioManager.Load(_pickSoundName);
                 AudioManager.Play();
             };
 
             //Play turn chage sound
             _turnChangeEvent += () =>
             {
-                AudioManager.Load("Magic Spell_Simple Swoosh_6.wav");
+                AudioManager.Load(_turnChangeSoundName);
                 AudioManager.Play();
                 Thread.Sleep(300);
             };
@@ -203,7 +205,7 @@ namespace Nim
             LeaderboardHandler.SetPlayerLoses(val);
 
             //Play Lose sound
-            AudioManager.Load("Heheheha.wav");
+            AudioManager.Load(_loseSoundName);
             AudioManager.Play();
 
             //End the connection
