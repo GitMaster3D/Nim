@@ -32,6 +32,7 @@
             this.StartPannel = new System.Windows.Forms.Panel();
             this.MultiplayerCheckbox = new System.Windows.Forms.CheckBox();
             this.MultiplayerOptionsPanel = new System.Windows.Forms.Panel();
+            this.LastConnectionBtn = new System.Windows.Forms.Button();
             this.ConnectedLabel = new System.Windows.Forms.Label();
             this.PortLabel = new System.Windows.Forms.Label();
             this.IpInputLabel = new System.Windows.Forms.Label();
@@ -60,7 +61,6 @@
             this.RestartBtn = new System.Windows.Forms.Button();
             this.LooseLabel = new System.Windows.Forms.Label();
             this.Matches = new System.Windows.Forms.Label();
-            this.LastConnectionBtn = new System.Windows.Forms.Button();
             this.StartPannel.SuspendLayout();
             this.MultiplayerOptionsPanel.SuspendLayout();
             this.MainControls.SuspendLayout();
@@ -137,6 +137,21 @@
             this.MultiplayerOptionsPanel.Name = "MultiplayerOptionsPanel";
             this.MultiplayerOptionsPanel.Size = new System.Drawing.Size(609, 150);
             this.MultiplayerOptionsPanel.TabIndex = 16;
+            // 
+            // LastConnectionBtn
+            // 
+            this.LastConnectionBtn.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.LastConnectionBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.LastConnectionBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LastConnectionBtn.ForeColor = System.Drawing.SystemColors.Control;
+            this.LastConnectionBtn.Location = new System.Drawing.Point(486, 30);
+            this.LastConnectionBtn.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.LastConnectionBtn.Name = "LastConnectionBtn";
+            this.LastConnectionBtn.Size = new System.Drawing.Size(123, 49);
+            this.LastConnectionBtn.TabIndex = 19;
+            this.LastConnectionBtn.Text = "Last";
+            this.LastConnectionBtn.UseVisualStyleBackColor = true;
+            this.LastConnectionBtn.Click += new System.EventHandler(this.LastConnectionBtn_Click);
             // 
             // ConnectedLabel
             // 
@@ -400,7 +415,7 @@
             this.CurrentPlayerLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CurrentPlayerLabel.ForeColor = System.Drawing.SystemColors.Control;
             this.CurrentPlayerLabel.Location = new System.Drawing.Point(1582, 0);
-            this.CurrentPlayerLabel.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.CurrentPlayerLabel.Margin = new System.Windows.Forms.Padding(8);
             this.CurrentPlayerLabel.Name = "CurrentPlayerLabel";
             this.CurrentPlayerLabel.Padding = new System.Windows.Forms.Padding(0, 39, 0, 0);
             this.CurrentPlayerLabel.Size = new System.Drawing.Size(178, 100);
@@ -501,21 +516,6 @@
             this.Matches.Size = new System.Drawing.Size(362, 72);
             this.Matches.TabIndex = 0;
             this.Matches.Text = "Matches";
-            // 
-            // LastConnectionBtn
-            // 
-            this.LastConnectionBtn.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.LastConnectionBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.LastConnectionBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LastConnectionBtn.ForeColor = System.Drawing.SystemColors.Control;
-            this.LastConnectionBtn.Location = new System.Drawing.Point(486, 30);
-            this.LastConnectionBtn.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.LastConnectionBtn.Name = "LastConnectionBtn";
-            this.LastConnectionBtn.Size = new System.Drawing.Size(123, 49);
-            this.LastConnectionBtn.TabIndex = 19;
-            this.LastConnectionBtn.Text = "Last";
-            this.LastConnectionBtn.UseVisualStyleBackColor = true;
-            this.LastConnectionBtn.Click += new System.EventHandler(this.LastConnectionBtn_Click);
             // 
             // GameForm
             // 

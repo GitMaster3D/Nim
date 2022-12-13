@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -50,7 +51,7 @@ namespace Nim
 
             //Prevent flickering
             this.DoubleBuffered = true;
-            
+
             //Form elements
             _mainGamePanel = MainGamePanel;
             _matchesLabel = Matches;
@@ -119,6 +120,11 @@ namespace Nim
                 };
                 this.Invoke(inv);
             });
+
+            //Load last port and ip connected to
+            ConnectData data = LoadLastConnectionData();
+            MainForm.s_lastIp = data.Ip;
+            MainForm.s_lastPort = data.Port;
         }
 
 
@@ -202,7 +208,7 @@ namespace Nim
                 return;
             }
 
-            
+
             //Start the game if the start options are correct
             if ((players >= 2 && players <= 4 && matches >= 15 && matches < 128 && !_multiplayer) || (BotmatchCheckbox.Checked && matches >= 10 && matches < 128 && !_multiplayer))
             {
@@ -258,7 +264,7 @@ namespace Nim
             //Make only one box checkable
             CheckBox activeCheckBox = sender as CheckBox;
 
-            if (activeCheckBox != _lastChecked && _lastChecked != null) 
+            if (activeCheckBox != _lastChecked && _lastChecked != null)
                 _lastChecked.Checked = false;
 
             _lastChecked = activeCheckBox.Checked ? activeCheckBox : null;
@@ -311,7 +317,7 @@ namespace Nim
         /// Change Difficulty of the bot to HARDEST
         /// </summary>
         private void ImpossibleMode_CheckedChanged(object sender, EventArgs e)
-        {           
+        {
             //Make only one box checkable
             CheckBox activeCheckBox = sender as CheckBox;
 
@@ -390,6 +396,9 @@ namespace Nim
             int port = 0;
             int.TryParse(this.PortTextbox.Text, out port);
             MainForm.s_lastPort = port;
+
+            //Saves connect data
+            SaveLastConnection(this.ConnectIpTextbox.Text, port);
         }
 
 
@@ -407,6 +416,9 @@ namespace Nim
             int port = 0;
             int.TryParse(this.PortTextbox.Text, out port);
             MainForm.s_lastPort = port;
+
+            //Saves connect data
+            SaveLastConnection(this.ConnectIpTextbox.Text, port);
         }
 
 
@@ -427,11 +439,15 @@ namespace Nim
             PlayerCountLabel.Visible = !_multiplayer;
         }
 
+
+
         public enum LastConnection
         {
             Host = 0,
             Client = 1
         }
+
+
 
         /// <summary>
         /// Connects / Hosts with the last inputs
@@ -440,6 +456,79 @@ namespace Nim
         {
             this.PortTextbox.Text = MainForm.s_lastPort.ToString();
             this.ConnectIpTextbox.Text = MainForm.s_lastIp;
+        }
+
+
+
+        /// <summary>
+        /// Saves last Connection (ip and port) to file 
+        /// for later recovery
+        /// </summary>
+        public void SaveLastConnection(string Ip, int port)
+        {
+            string dirParameter = AppDomain.CurrentDomain.BaseDirectory + @"/LastConnection.save";
+
+            try
+            {
+                using (FileStream fs = File.Open(dirParameter, FileMode.OpenOrCreate, FileAccess.Write))
+                {
+                    StreamWriter streamWriter = new StreamWriter(fs);
+
+                    //Write
+                    streamWriter.WriteLine(Ip);
+                    streamWriter.WriteLine(port);
+
+                    //End filestream
+                    streamWriter.Flush();
+                    streamWriter.Close();
+                    streamWriter.Dispose();
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+
+
+        /// <summary>
+        /// Loads last used Ip and port from file
+        /// </summary>
+        public ConnectData LoadLastConnectionData()
+        {
+            ConnectData data = new ConnectData();
+
+            string dirParameter = AppDomain.CurrentDomain.BaseDirectory + @"/LastConnection.save";
+
+            try
+            {
+                using (FileStream fs = File.Open(dirParameter, FileMode.Open, FileAccess.Read))
+                {
+                    StreamReader streamReader = new StreamReader(fs);
+
+                    data.Ip = streamReader.ReadLine();
+                    data.Port = int.Parse(streamReader.ReadLine());
+
+                    //end filestream
+                    streamReader.Close();
+                    streamReader.Dispose();
+                }
+
+                return data;
+            }
+            catch (Exception ex)
+            {
+                data.Port = 0;
+                data.Ip = "";
+                return data;
+            }
+        }
+
+        public struct ConnectData
+        {
+            public int Port;
+            public string Ip;
         }
     }
 }

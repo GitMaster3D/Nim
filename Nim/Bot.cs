@@ -50,7 +50,7 @@ namespace Nim
             {
                 take = matches - 1;
             }
-
+            
             // Enshure that no illegal turn will be performed
             if (take > 0 && take < 4)
                 return take;
