@@ -24,7 +24,6 @@ namespace Nim
         /// <param name="name"></param>
         public static void Load(string name)
         {
-
             _soundPlayer = new SoundPlayer(GetAudioPath(name));
             _soundPlayer.Load();
         }
