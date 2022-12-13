@@ -84,9 +84,7 @@ namespace Nim
                         Thread.Sleep(600);
                         BotTurn();
                     }
-
                 };
-
             }
 
             //Play take match sound
