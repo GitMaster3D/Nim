@@ -391,7 +391,6 @@ namespace Nim
         {
             _multiplayerHandler.Connect();
 
-            MainForm.s_lastConnection = LastConnection.Client;
             MainForm.s_lastIp = this.ConnectIpTextbox.Text;
             int port = 0;
             int.TryParse(this.PortTextbox.Text, out port);
@@ -410,7 +409,6 @@ namespace Nim
         {
             _multiplayerHandler.Host();
 
-            MainForm.s_lastConnection = LastConnection.Host;
             MainForm.s_lastIp = this.ConnectIpTextbox.Text;
 
             int port = 0;
@@ -437,14 +435,6 @@ namespace Nim
             BotmatchCheckbox.Visible = !_multiplayer;
             PlayerCountTextbox.Visible = !_multiplayer;
             PlayerCountLabel.Visible = !_multiplayer;
-        }
-
-
-
-        public enum LastConnection
-        {
-            Host = 0,
-            Client = 1
         }
 
 

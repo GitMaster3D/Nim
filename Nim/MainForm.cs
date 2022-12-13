@@ -25,7 +25,6 @@ namespace Nim
 
 
         //Public
-        public static GameForm.LastConnection s_lastConnection;
         public static string s_lastIp = "";
         public static int s_lastPort = 0;   
 
