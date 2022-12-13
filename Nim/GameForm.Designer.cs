@@ -147,7 +147,7 @@
             this.LastConnectionBtn.Location = new System.Drawing.Point(486, 30);
             this.LastConnectionBtn.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.LastConnectionBtn.Name = "LastConnectionBtn";
-            this.LastConnectionBtn.Size = new System.Drawing.Size(123, 49);
+            this.LastConnectionBtn.Size = new System.Drawing.Size(119, 49);
             this.LastConnectionBtn.TabIndex = 19;
             this.LastConnectionBtn.Text = "Last";
             this.LastConnectionBtn.UseVisualStyleBackColor = true;
