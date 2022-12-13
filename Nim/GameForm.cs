@@ -468,25 +468,18 @@ namespace Nim
         {
             string dirParameter = AppDomain.CurrentDomain.BaseDirectory + @"/LastConnection.save";
 
-            try
+            using (FileStream fs = File.Open(dirParameter, FileMode.OpenOrCreate, FileAccess.Write))
             {
-                using (FileStream fs = File.Open(dirParameter, FileMode.OpenOrCreate, FileAccess.Write))
-                {
-                    StreamWriter streamWriter = new StreamWriter(fs);
+                StreamWriter streamWriter = new StreamWriter(fs);
 
-                    //Write
-                    streamWriter.WriteLine(Ip);
-                    streamWriter.WriteLine(port);
+                //Write
+                streamWriter.WriteLine(Ip);
+                streamWriter.WriteLine(port);
 
-                    //End filestream
-                    streamWriter.Flush();
-                    streamWriter.Close();
-                    streamWriter.Dispose();
-                }
-            }
-            catch (Exception e)
-            {
-                throw e;
+                //End filestream
+                streamWriter.Flush();
+                streamWriter.Close();
+                streamWriter.Dispose();
             }
         }
 
