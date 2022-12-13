@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace Nim
 {
-    public partial class BottomRight_Scale : Form
+    public partial class MainForm : Form
     {
         //Private 
 
@@ -22,7 +22,16 @@ namespace Nim
 
         GameForm _gameForm;
 
-        public BottomRight_Scale()
+
+
+        //Public
+        public static GameForm.LastConnection s_lastConnection;
+        public static string s_lastIp = "";
+        public static int s_lastPort = 0;   
+
+
+
+        public MainForm()
         {
             //Fix scaling issue on unusual displays where part of the form is cut of
             this.AutoScaleMode = AutoScaleMode.Dpi;

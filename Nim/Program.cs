@@ -16,7 +16,7 @@ namespace Nim
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new BottomRight_Scale());
+            Application.Run(new MainForm());
         }
     }
 }

@@ -384,6 +384,12 @@ namespace Nim
         private void Connectbtn_Click(object sender, EventArgs e)
         {
             _multiplayerHandler.Connect();
+
+            MainForm.s_lastConnection = LastConnection.Client;
+            MainForm.s_lastIp = this.ConnectIpTextbox.Text;
+            int port = 0;
+            int.TryParse(this.PortTextbox.Text, out port);
+            MainForm.s_lastPort = port;
         }
 
 
@@ -394,6 +400,13 @@ namespace Nim
         private void Hostbtn_Click(object sender, EventArgs e)
         {
             _multiplayerHandler.Host();
+
+            MainForm.s_lastConnection = LastConnection.Host;
+            MainForm.s_lastIp = this.ConnectIpTextbox.Text;
+
+            int port = 0;
+            int.TryParse(this.PortTextbox.Text, out port);
+            MainForm.s_lastPort = port;
         }
 
 
@@ -412,6 +425,21 @@ namespace Nim
             BotmatchCheckbox.Visible = !_multiplayer;
             PlayerCountTextbox.Visible = !_multiplayer;
             PlayerCountLabel.Visible = !_multiplayer;
+        }
+
+        public enum LastConnection
+        {
+            Host = 0,
+            Client = 1
+        }
+
+        /// <summary>
+        /// Connects / Hosts with the last inputs
+        /// </summary>
+        private void LastConnectionBtn_Click(object sender, EventArgs e)
+        {
+            this.PortTextbox.Text = MainForm.s_lastPort.ToString();
+            this.ConnectIpTextbox.Text = MainForm.s_lastIp;
         }
     }
 }
