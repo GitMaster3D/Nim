@@ -45,6 +45,9 @@ namespace Nim
             this.MinimumSize = new Size(800, 500);
             this.FormBorderStyle = FormBorderStyle.None;
 
+            //Open at minimum size
+            this.Size = new Size(this.MinimumSize.Width, this.MinimumSize.Height);
+
             //Load leaderborard texts
             LeaderboardHandler.UpdateLeaderboard(Leaderboard);
         }
