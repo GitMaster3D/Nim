@@ -170,6 +170,9 @@ namespace Nim
         /// </summary>
         public void Lose()
         {
+            if (_gameForm == null)
+                return;
+
             //Show game end screen
             _gameForm._loosePannel.Visible = true;
             _gameForm._looseLabel.Text = ((Players)_currentPlayer).ToString() + " Lost the game";

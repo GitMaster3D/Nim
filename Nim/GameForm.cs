@@ -107,7 +107,6 @@ namespace Nim
                 _gameManager.TakeOne();
             else if (_started)
                 _onlineGame.TakeOne();
-
         }
 
 
@@ -331,7 +330,7 @@ namespace Nim
         {
             if (_multiplayer)
             {
-                if (_onlineGame != null)
+                if (_onlineGame != null && _onlineGame._matches > 0)
                 {
                     _onlineGame._currentPlayer = _onlineGame._player;
 
@@ -344,7 +343,7 @@ namespace Nim
             }
             else
             {
-                if (_gameManager != null)
+                if (_gameManager != null && _gameManager._matches > 0)
                 {
                     _gameManager.Lose();
                 }
