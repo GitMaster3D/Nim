@@ -44,4 +44,26 @@ manchmal exception beim speichern
 
 Hinzufügen eines speicherns der letzten ip / port für einfache
 rematches.
+
+Despagettisierung des codes
+
 Konnte keine probleme (Bis auf langsames rendern der forms) mehr ausfindig machen
+
+
+
+
+Fazit:
+
+Gelernt: simpler Netcode in c#, Github benutzen, wie die lerp funktion funktioniert.
+
+Was ich anders machen würde:
+
+Das send system mit rpc und value buffer, da nur zahlen von 0 - 128 und keine datentypen sendbar sind.
+wenn man rpc methoden hinzufügen will, kann das für probleme sorgen, sie per string aufzurufen wäre in 
+dieser hinsicht besser.
+
+Die struktur des projektes vorher überdenken, features die am anfang nicht eingeplant waren mussten
+spagetti mäßig eingebaut werden.
+
+Nicht forms verwenden, ich weiß jetzt warum es einen nachfolger giebt
+
