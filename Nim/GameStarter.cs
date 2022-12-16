@@ -43,7 +43,7 @@ namespace Nim
         }
 
         /// <summary>
-        /// Invoke start event when game and
+        /// Invokes start event when game and
         /// visuals manager have loaded
         /// </summary>
         void StartCheck()
