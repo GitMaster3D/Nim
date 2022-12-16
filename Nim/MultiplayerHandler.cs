@@ -71,7 +71,11 @@ public class MultiplayerHandler
 
         bool connection = _networkManager.Connect(_inputIpTextbox.Text, int.Parse(_inputPortTextbox.Text));
         if (!connection)
-            throw new Exception("Failed connection");
+        {
+            _connectedLabel.Text = "Failed!";
+            return;
+        }
+
 
         _AutoReadStream = true; //Checks for rpc calls and new values on the network
         _isHost = false;

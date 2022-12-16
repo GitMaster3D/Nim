@@ -2,9 +2,16 @@
 using System;
 using System.Windows.Forms;
 
+/// <summary>
+/// Used to define and initialize Rpc calls, 
+/// new rpc calls should always be added to the bottom of each function
+/// </summary>
 public static class RpcInitializer
 {
-    public static void Initialize(MultiplayerHandler multiplayerHandler, GameForm gameForm)
+    /// <summary>
+    /// Rpcs needed to start the game
+    /// </summary>
+    public static void InitializeConnectionRpc(MultiplayerHandler multiplayerHandler, GameForm gameForm)
     {
         //////////////////////// Multiplayerhandler Rpcs //////////////////////////
 
@@ -17,6 +24,7 @@ public static class RpcInitializer
 
             multiplayerHandler._inputIpTextbox.Invoke(inv);
         });
+
 
 
 
@@ -45,6 +53,10 @@ public static class RpcInitializer
         };
         multiplayerHandler._rpcList.Add(startGame);
 
+
+
+
+
         //Leaderbord
         multiplayerHandler._rpcList.Add(() =>
         {
@@ -54,6 +66,58 @@ public static class RpcInitializer
 
                 gameForm._onlineGame.Lose();
 
+            };
+            gameForm.Invoke(inv);
+        });
+    }
+
+    /// <summary>
+    /// Rpcs needed to play but not to start the game
+    /// </summary>
+    public static void InitializeOnlinegame(MultiplayerHandler multiplayerHandler, OnlineGame onlineGame, GameForm gameForm)
+    {
+        //////////////////////// Onlinegame Rpcs //////////////////////////
+
+        //Pick on client
+        multiplayerHandler._rpcList.Add(() =>
+        {
+            MethodInvoker inv = delegate
+            {
+                onlineGame._matches = onlineGame._multiplayerHandler._valueBuffer.Dequeue(); //Get match count
+                onlineGame._remainingPicks = onlineGame._multiplayerHandler._valueBuffer.Dequeue(); //Get picks count
+                onlineGame._pickEvent?.Invoke();
+
+                onlineGame.LooseCheck();
+            };
+            onlineGame._gameForm.Invoke(inv); //Run on ui thread
+        });
+
+
+
+        //Change turn on client
+        multiplayerHandler._rpcList.Add(() =>
+        {
+            MethodInvoker inv = delegate
+            {
+                onlineGame._remainingPicks = 3;
+                onlineGame._currentPlayer = onlineGame._multiplayerHandler._valueBuffer.Dequeue();
+                onlineGame._turnChangeEvent?.Invoke();
+
+                onlineGame.LooseCheck();
+            };
+            onlineGame._gameForm.Invoke(inv); //Run on ui thread
+        });
+
+
+
+
+        //Chose start player
+        multiplayerHandler._rpcList.Add(() =>
+        {
+            MethodInvoker inv = delegate
+            {
+                onlineGame._currentPlayer = onlineGame._multiplayerHandler._valueBuffer.Dequeue();
+                onlineGame._turnChangeEvent?.Invoke();
             };
             gameForm.Invoke(inv);
         });

@@ -233,8 +233,15 @@ namespace Network
         /// <returns>true if connection was successfully established and false if not</returns>
         public bool Connect(String ip, int port)
         {
-            tcpClient = new TcpClient(ip, port);
-            return tcpClient.Connected;
+            try
+            {
+                tcpClient = new TcpClient(ip, port);
+                return tcpClient.Connected;
+            }
+            catch
+            {
+                return false;
+            }
         }
 
         /// <summary>

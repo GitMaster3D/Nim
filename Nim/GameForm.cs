@@ -15,16 +15,15 @@ namespace Nim
 {
     public partial class GameForm : Form
     {
-        //Private
-        private GameManager _gameManager;
-        private OnlineGame _onlineGame;
-        private GameVisualsManager _gameVisualsManager;
-        private OnlineGameVisualsManager _onlineGameVisualsManager;
-        private bool _started = false;
-        private NimBot.Difficulty _difficulty = NimBot.Difficulty.Medium; //Difficulty is medium if no difficulty was selected
-        private bool _multiplayer;
 
         //Public
+        public GameManager _gameManager;
+        public OnlineGame _onlineGame;
+        public GameVisualsManager _gameVisualsManager;
+        public OnlineGameVisualsManager _onlineGameVisualsManager;
+        public bool _started = false;
+        public NimBot.Difficulty _difficulty = NimBot.Difficulty.Medium; //Difficulty is medium if no difficulty was selected
+        public bool _multiplayer;
         public bool _botmatch;
         public MultiplayerHandler _multiplayerHandler;
 
@@ -36,6 +35,7 @@ namespace Nim
         public Label _looseLabel;
         public Label _currentPlayerLabel;
         public Panel _controlsPanel;
+        public Panel _startPanel;
 
         //Events
         public Action _closeEvent;
@@ -60,6 +60,7 @@ namespace Nim
             _loosePannel = LoosePanel;
             _currentPlayerLabel = CurrentPlayerLabel;
             _controlsPanel = MainControls;
+            _startPanel = StartPannel;
 
             //Disable unneeded panels
             _loosePannel.Visible = false;
@@ -84,47 +85,14 @@ namespace Nim
             MultiplayerHandler multiplayerHanler = new MultiplayerHandler(networkManager, IpLabel, ConnectIpTextbox, PortTextbox, ConnectedLabel);
             _multiplayerHandler = multiplayerHanler;
             MultiplayerOptionsPanel.Visible = false; //Multiplayer stars as off
+            RpcInitializer.InitializeConnectionRpc(multiplayerHanler, this); //Load rpcs needed to start the game
 
-            //Starts the game on the client
-            Action startGame = () =>
-            {
-                MethodInvoker inv = delegate
-                {
-                    //Get match amount
-                    int matches = _multiplayerHandler._valueBuffer.Dequeue();
-
-                    //Show game controls
-                    _controlsPanel.Visible = true;
-                    StartPannel.Visible = false;
-
-                    //Handle the game logic
-                    GameStarter starter = new GameStarter();
-                    _onlineGame = new OnlineGame(matches, this, starter, multiplayerHanler);
-                    _onlineGameVisualsManager = new OnlineGameVisualsManager(_onlineGame, this, starter);
-
-                    _started = true;
-                };
-                _controlsPanel.Invoke(inv);
-            };
-            multiplayerHanler._rpcList.Add(startGame);
-
-            //Leaderbord
-            multiplayerHanler._rpcList.Add(() =>
-            {
-                MethodInvoker inv = delegate
-                {
-                    _onlineGame._currentPlayer = _multiplayerHandler._valueBuffer.Dequeue();
-
-                    _onlineGame.Lose();
-
-                };
-                this.Invoke(inv);
-            });
 
             //Load last port and ip connected to
             ConnectData data = LoadLastConnectionData();
             MainForm.s_lastIp = data.Ip;
             MainForm.s_lastPort = data.Port;
+
         }
 
 
@@ -190,7 +158,7 @@ namespace Nim
                 //Show game controls for client
                 _multiplayerHandler.SendValue((byte)matches);
                 _multiplayerHandler.SendRpc(1);
-
+                
 
                 //Show game controls
                 _controlsPanel.Visible = true;
@@ -201,6 +169,7 @@ namespace Nim
                 GameStarter starter = new GameStarter();
                 _onlineGame = new OnlineGame(matches, this, starter, _multiplayerHandler);
                 _onlineGameVisualsManager = new OnlineGameVisualsManager(_onlineGame, this, starter);
+
 
                 _started = true;
 
