@@ -1,6 +1,6 @@
 ﻿namespace Nim
 {
-    partial class BottomRight_Scale
+    partial class MainForm
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BottomRight_Scale));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.Border = new System.Windows.Forms.Panel();
             this.TopLeft_Scaling = new System.Windows.Forms.Panel();
             this.ScaleTopLeft = new System.Windows.Forms.Panel();

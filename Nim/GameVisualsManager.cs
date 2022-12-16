@@ -60,7 +60,8 @@ namespace Nim
             Action removeMatches = () =>
             {
                 PictureBox remove = pictureBoxes.Pop(); //Box that should be removed
-                HorizontalMove(remove, remove.Location.X + 800, 300);
+
+                HorizontalMove(remove, remove.Location.X + 800, 300, form1._mainGamePanel);
 
                 form1._mainGamePanel.Controls.Remove(remove); //Remove from form
             };
@@ -163,7 +164,7 @@ namespace Nim
         /// <summary>
         /// Horizontal slide animation
         /// </summary>
-        public void HorizontalMove(Control control, float horizontal, float duration)
+        public void HorizontalMove(Control control, float horizontal, float duration, Panel panel)
         {
             float xStart = control.Location.X;
             float x;
@@ -181,6 +182,5 @@ namespace Nim
                 elapsed = sw.ElapsedMilliseconds;
             }
         }
-
     }
 }

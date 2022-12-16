@@ -34,8 +34,7 @@ namespace Nim
                 // If the bot gets stuck on one of the good
                 // Targets, the game is basically lost, except the player makes a mistake,
                 // so it takes a random amount of matches
-                Random rnd = new Random();
-                take = rnd.Next(1, 4);
+                take = _rnd.Next(1, 4);
             }
             else
             {
@@ -51,7 +50,7 @@ namespace Nim
             {
                 take = matches - 1;
             }
-
+            
             // Enshure that no illegal turn will be performed
             if (take > 0 && take < 4)
                 return take;
