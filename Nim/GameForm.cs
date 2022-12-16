@@ -14,14 +14,13 @@ namespace Nim
 {
     public partial class GameForm : Form
     {
-        //Private
-        private GameManager _gameManager;
-        private OnlineGame _onlineGame;
-        private GameVisualsManager _gameVisualsManager;
-        private OnlineGameVisualsManager _onlineGameVisualsManager;
-        private bool _started = false;
-        private NimBot.Difficulty _difficulty = NimBot.Difficulty.Medium; //Difficulty is medium if no difficulty was selected
-        private bool _multiplayer;
+        public GameManager _gameManager;
+        public OnlineGame _onlineGame;
+        public GameVisualsManager _gameVisualsManager;
+        public OnlineGameVisualsManager _onlineGameVisualsManager;
+        public bool _started;
+        public NimBot.Difficulty _difficulty; //Difficulty is medium if no difficulty was selected
+        public bool _multiplayer;
 
         //Public
         public bool _botmatch;
@@ -35,6 +34,7 @@ namespace Nim
         public Label _looseLabel;
         public Label _currentPlayerLabel;
         public Panel _controlsPanel;
+        public Panel _startPanel;
 
         //Events
         public Action _closeEvent;
@@ -50,7 +50,10 @@ namespace Nim
 
             //Prevent flickering
             this.DoubleBuffered = true;
-            
+
+            _difficulty = NimBot.Difficulty.Medium;
+            _started = false;
+
             //Form elements
             _mainGamePanel = MainGamePanel;
             _matchesLabel = Matches;
@@ -59,6 +62,9 @@ namespace Nim
             _loosePannel = LoosePanel;
             _currentPlayerLabel = CurrentPlayerLabel;
             _controlsPanel = MainControls;
+            _startPanel = StartPannel;
+
+
 
             //Disable unneeded panels
             _loosePannel.Visible = false;
@@ -83,7 +89,9 @@ namespace Nim
             MultiplayerHandler multiplayerHanler = new MultiplayerHandler(networkManager, IpLabel, ConnectIpTextbox, PortTextbox, ConnectedLabel);
             _multiplayerHandler = multiplayerHanler;
             MultiplayerOptionsPanel.Visible = false; //Multiplayer stars as off
+            RpcInitializer.Initialize(multiplayerHanler, this);
 
+            /*
             //Starts the game on the client
             Action startGame = () =>
             {
@@ -119,6 +127,7 @@ namespace Nim
                 };
                 this.Invoke(inv);
             });
+            */
         }
 
 

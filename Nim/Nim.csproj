@@ -73,6 +73,7 @@
     <Compile Include="NimMath.cs" />
     <Compile Include="LeaderboardHandler.cs" />
     <Compile Include="AudioManager.cs" />
+    <Compile Include="RpcInitializer.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="GameForm.resx">
