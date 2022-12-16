@@ -39,3 +39,9 @@ Probleme: Schreckliche performance von forms
 Online multiplayer
 Probleme: 
 manchmal exception beim speichern
+
+16.12. - 
+
+Hinzufügen eines speicherns der letzten ip / port für einfache
+rematches.
+Konnte keine probleme (Bis auf langsames rendern der forms) mehr ausfindig machen
