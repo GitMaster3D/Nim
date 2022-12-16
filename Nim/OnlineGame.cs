@@ -24,10 +24,8 @@ namespace Nim
         public int _totalPlayers = 2; //how many players in the game are
         public byte _player; //Wich player you are
 
-
-        //private
-        private GameForm _gameForm;
-        private MultiplayerHandler _multiplayerHandler;
+        public GameForm _gameForm;
+        public MultiplayerHandler _multiplayerHandler;
 
         //Const
         private const string _pickSoundName = "Cannon impact 9.wav"; //Cashe sound names to avoid allocating garbage
@@ -67,45 +65,10 @@ namespace Nim
             //tell the startet that the game logic loaded
             starter._GameLoaded = true;
 
-            //Pick on client
-            _multiplayerHandler._rpcList.Add(() =>
-            {
-                MethodInvoker inv = delegate
-                {
-                    _matches = _multiplayerHandler._valueBuffer.Dequeue(); //Get match count
-                    _remainingPicks = _multiplayerHandler._valueBuffer.Dequeue(); //Get picks count
-                    _pickEvent?.Invoke();
+            //Load all needed rpc calls
+            RpcInitializer.InitializeOnlinegame(multiplayerHandler, this, gameForm);
 
-                    LooseCheck();
-                };
-                _gameForm.Invoke(inv); //Run on ui thread
-            });
-
-            //Change turn on client
-            _multiplayerHandler._rpcList.Add(() =>
-            {
-                MethodInvoker inv = delegate
-                {
-                    _remainingPicks = 3;
-                    _currentPlayer = _multiplayerHandler._valueBuffer.Dequeue();
-                    _turnChangeEvent?.Invoke();
-
-                    LooseCheck();
-                };
-                _gameForm.Invoke(inv); //Run on ui thread
-            });
-
-            //Chose start player
-            _multiplayerHandler._rpcList.Add(() =>
-            {
-                MethodInvoker inv = delegate
-                {
-                    _currentPlayer = _multiplayerHandler._valueBuffer.Dequeue();
-                    _turnChangeEvent?.Invoke();
-                };
-                gameForm.Invoke(inv);
-            });
-
+         
 
             //Play take match sound
             _pickEvent += () =>

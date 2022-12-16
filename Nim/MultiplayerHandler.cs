@@ -12,10 +12,10 @@ using System.Windows.Forms;
 
 public class MultiplayerHandler
 {
-    //Private
-    private NetworkManager _networkManager;
-    private TextBox _inputIpTextbox;
-    private TextBox _inputPortTextbox;
+    public NetworkManager _networkManager { get; private set; }
+    public TextBox _inputIpTextbox { get; private set; }
+    public TextBox _inputPortTextbox { get; private set; }
+    public Label _connectedLabel { get; private set; }
 
     private Queue<Action> _rpcBuffer;
 
@@ -54,20 +54,11 @@ public class MultiplayerHandler
         _networkManager = networkManager;
         _inputIpTextbox = targetIp;
         _inputPortTextbox = targetPort;
+        _connectedLabel = connectedLabel;
 
         _rpcList = new List<Action>();
         _rpcBuffer = new Queue<Action>();
         _valueBuffer = new Queue<byte>();
-
-        _rpcList.Add(() =>
-        {
-            MethodInvoker inv = delegate
-            {
-                connectedLabel.Text = "Connected";
-            };
-
-            _inputIpTextbox.Invoke(inv);
-        });
     }
 
     /// <summary>
@@ -80,7 +71,11 @@ public class MultiplayerHandler
 
         bool connection = _networkManager.Connect(_inputIpTextbox.Text, int.Parse(_inputPortTextbox.Text));
         if (!connection)
-            throw new Exception("Failed connection");
+        {
+            _connectedLabel.Text = "Failed!";
+            return;
+        }
+
 
         _AutoReadStream = true; //Checks for rpc calls and new values on the network
         _isHost = false;
